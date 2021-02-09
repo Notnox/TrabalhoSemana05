@@ -8,7 +8,7 @@ const Corpo = () => {
                 <h1>Escola Amorinha</h1>
             </nav>
             <Section titulo="Cadastro de alunos" />
-            <Section titulo="Consulta de alunos" />
+            <Section titulo="Consulta de alunos" tabela="true" />
         </div>
     );
 };
