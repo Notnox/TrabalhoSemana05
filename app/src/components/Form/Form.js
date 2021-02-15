@@ -16,6 +16,7 @@ const Form = ({ }) => {
     const [valueCadastro, setValueCadastro] = useState(INITIAL_CADASTRO);
     const [autorizado, setAutorizado] = useState(INITIAL_AUTORIZADOS);
     const [autorizados, setAutorizados] = useState([]);
+    const [alimentar, setAlimentar] = useState(false)
 
     const onChangeAutorizado = (e) => {
         const { name, value } = e.target;
@@ -30,6 +31,14 @@ const Form = ({ }) => {
 
         setAutorizados([...autorizados, autorizado]);
         setAutorizado(INITIAL_AUTORIZADOS);
+    }
+
+    const RAlimentar = () => {
+        if (alimentar) {
+            setAlimentar(false)
+        } else {
+            setAlimentar(true)
+        }
     }
 
     return (
@@ -50,6 +59,18 @@ const Form = ({ }) => {
                 <p>Data</p>
                 <Data desc="Informe a data" />
             </label>
+            <label>
+                <input type='checkbox' onClick={RAlimentar} /> Possui restrição alimentar?
+            </label>
+            {alimentar &&
+                <label>
+                    <p>Descrição da restrição alimentar</p>
+                    <input type='text' placeholder='Descreva a restrição.'/>
+                </label>
+            }
+            <label>
+                <input type='checkbox' /> Autorização de fotos e vídeos da criança para uso escolar
+            </label>
             <div>
                 <p>Autorizados para retirada</p>
                 {autorizados.length > 0 && autorizados.map((e) => {
@@ -59,7 +80,7 @@ const Form = ({ }) => {
                 })}
                 <label>
                     <p>Nome</p>
-                    <input type='text' placeholder='Informe o nome' name='nome' onChange={onChangeAutorizado} value={autorizado.nome}/>
+                    <input type='text' placeholder='Informe o nome' name='nome' onChange={onChangeAutorizado} value={autorizado.nome} />
                 </label>
                 <label>
                     <p>Parentesco</p>
