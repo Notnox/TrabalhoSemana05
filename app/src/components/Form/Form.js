@@ -14,20 +14,47 @@ const INITIAL_CADASTRO = {
     avisar: '',
     turma: '',
     obs: '',
-    fotos: false,
-    autorizados: {}
+    fotos: false
 };
 
 const INITIAL_AUTORIZADOS = {
     nome: '',
-    parentesco: ''
+    parentesco: '',
+    alunoId: ''
 };
 
-const Form = ({ }) => {
+const Form = ({ id }) => {
 
+    const [valores, setValores] = useState([])
     const [valueCadastro, setValueCadastro] = useState(INITIAL_CADASTRO);
     const [autorizado, setAutorizado] = useState(INITIAL_AUTORIZADOS);
     const [autorizados, setAutorizados] = useState([]);
+
+    useEffect(() => {
+        if (id) {
+            axios.get(`http://localhost:5000/alunos/${id}`)
+                .then((response) => {
+                    setValores(response.data)
+                })
+        } else {
+            axios.get('http://localhost:5000/alunos?_embed=autorizados')
+                .then((response) => {
+                    setValores(response.data)
+                });
+        }
+    }, [])
+
+    useEffect(() => {
+        if (!id) {
+            setAutorizado({ ...autorizado, alunoId: valores.length + 1 });
+            INITIAL_AUTORIZADOS.alunoId = valores.length + 1
+        } else {
+            setAutorizado({ ...autorizado, alunoId: id });
+            INITIAL_AUTORIZADOS.alunoId = id
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [valores])
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -54,46 +81,58 @@ const Form = ({ }) => {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        setValueCadastro({ ...valueCadastro, autorizados: autorizados });
+        axios.post('http://localhost:5000/alunos', valueCadastro)
 
-        axios.post('http://localhost:5000/Alunos', valueCadastro)
+        if (autorizados) {
+            autorizados.map((item) => {
+                return axios.post('http://localhost:5000/autorizados', item)
+            });
+        }
+
+        console.log('id:', id, "autorizado:", autorizado,"autorizados:", autorizados);
+
+        INITIAL_AUTORIZADOS.alunoId += 1
 
         setValueCadastro(INITIAL_CADASTRO)
+        setAutorizado(INITIAL_AUTORIZADOS)
+        setAutorizados([])
+
+        console.log('id:', id, "autorizado:", autorizado,"autorizados:", autorizados);
     }
 
     return (
         <form onSubmit={onSubmit}>
             <label>
                 <p>Nome</p>
-                <input type='text' placeholder='Nome do aluno' name='nome' value={valueCadastro.nome} onChange={onChange}/>
+                <input type='text' placeholder='Nome do aluno' name='nome' value={valueCadastro.nome} onChange={onChange} />
             </label>
             <label>
                 <p>Responsável pelo aluno</p>
-                <input type='text' placeholder='Responsável pelo aluno' name='responsavel' value={valueCadastro.responsavel} onChange={onChange}/>
+                <input type='text' placeholder='Responsável pelo aluno' name='responsavel' value={valueCadastro.responsavel} onChange={onChange} />
             </label>
             <label>
                 <p>Telefone do responsável</p>
-                <Telefone name='responsavelTell' dados={valueCadastro} alterarDados={setValueCadastro} value={valueCadastro.responsavelTell}/>
+                <Telefone name='responsavelTell' dados={valueCadastro} alterarDados={setValueCadastro} value={valueCadastro.responsavelTell} />
             </label>
             <label>
                 <p>Telefone de emergência</p>
-                <Telefone name='responsavelEm' dados={valueCadastro} alterarDados={setValueCadastro} value={valueCadastro.responsavelEm}/>
+                <Telefone name='responsavelEm' dados={valueCadastro} alterarDados={setValueCadastro} value={valueCadastro.responsavelEm} />
             </label>
             <label>
                 <p>Data de Nascimento</p>
-                <Data desc="Informe a data" name='data' dados={valueCadastro} alterarDados={setValueCadastro} value={valueCadastro.data}/>
+                <Data desc="Informe a data" name='data' dados={valueCadastro} alterarDados={setValueCadastro} value={valueCadastro.data} />
             </label>
             <label>
-                <input type='checkbox' checked={valueCadastro.cAlimentos} onChange={() =>  setValueCadastro({ ...valueCadastro, cAlimentos: !valueCadastro.cAlimentos })}/> Possui restrição alimentar?
+                <input type='checkbox' checked={valueCadastro.cAlimentos} onChange={() => setValueCadastro({ ...valueCadastro, cAlimentos: !valueCadastro.cAlimentos })} /> Possui restrição alimentar?
             </label>
             {valueCadastro.cAlimentos &&
                 <label>
                     <p>Descrição da restrição alimentar</p>
-                    <input type='text' placeholder='Descreva a restrição.' name='alimento' value={valueCadastro.alimento} onChange={onChange}/>
+                    <input type='text' placeholder='Descreva a restrição.' name='alimento' value={valueCadastro.alimento} onChange={onChange} />
                 </label>
             }
             <label>
-                <input type='checkbox' checked={valueCadastro.fotos} onChange={() =>  setValueCadastro({ ...valueCadastro, fotos: !valueCadastro.fotos })}/> Autorização de fotos e vídeos da criança para uso escolar
+                <input type='checkbox' checked={valueCadastro.fotos} onChange={() => setValueCadastro({ ...valueCadastro, fotos: !valueCadastro.fotos })} /> Autorização de fotos e vídeos da criança para uso escolar
             </label>
             <div>
                 <p>Autorizados para retirada</p>
@@ -140,7 +179,7 @@ const Form = ({ }) => {
             </label>
             <label>
                 <p>Observações adicionais</p>
-                <textarea placeholder="Observações adicionais" name='obs' value={valueCadastro.obs} onChange={onChange}/>
+                <textarea placeholder="Observações adicionais" name='obs' value={valueCadastro.obs} onChange={onChange} />
             </label>
             <button type='button' onClick={() => setValueCadastro(INITIAL_CADASTRO)}>Novo</button>
             <button onSubmit={onSubmit}>Salvar</button>

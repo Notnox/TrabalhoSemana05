@@ -1,19 +1,78 @@
 {
-  "Alunos": [
+  "alunos": [
     {
-      "nome": "123123",
-      "responsavel": "321321",
-      "responsavelTell": "(31) 2 321",
-      "responsavelEm": "(32) 1 321",
-      "data": "32/13/213",
-      "cAlimentos": true,
-      "alimento": "321321",
-      "avisar": "Tios",
-      "turma": "B5",
-      "obs": "321321",
-      "fotos": true,
-      "autorizados": {},
+      "nome": "",
+      "responsavel": "",
+      "responsavelTell": "",
+      "responsavelEm": "",
+      "data": "",
+      "cAlimentos": false,
+      "alimento": "",
+      "avisar": "",
+      "turma": "",
+      "obs": "",
+      "fotos": false,
       "id": 1
+    },
+    {
+      "nome": "",
+      "responsavel": "",
+      "responsavelTell": "",
+      "responsavelEm": "",
+      "data": "",
+      "cAlimentos": false,
+      "alimento": "",
+      "avisar": "",
+      "turma": "",
+      "obs": "",
+      "fotos": false,
+      "id": 2
+    },
+    {
+      "nome": "",
+      "responsavel": "",
+      "responsavelTell": "",
+      "responsavelEm": "",
+      "data": "",
+      "cAlimentos": false,
+      "alimento": "",
+      "avisar": "",
+      "turma": "",
+      "obs": "",
+      "fotos": false,
+      "id": 3
+    }
+  ],
+  "autorizados": [
+    {
+      "nome": "4456",
+      "parentesco": "Tios",
+      "alunoId": 1,
+      "id": 1
+    },
+    {
+      "nome": "qwadsd",
+      "parentesco": "Irmão/ã",
+      "alunoId": 2,
+      "id": 2
+    },
+    {
+      "nome": "sadsadsa",
+      "parentesco": "Tios",
+      "alunoId": 3,
+      "id": 3
+    },
+    {
+      "nome": "dasdsadsa",
+      "parentesco": "Avós",
+      "alunoId": 3,
+      "id": 4
+    },
+    {
+      "nome": "dsadsadas",
+      "parentesco": "Irmão/ã",
+      "alunoId": 3,
+      "id": 5
     }
   ]
 }
