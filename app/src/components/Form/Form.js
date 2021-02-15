@@ -52,11 +52,15 @@ const Form = ({ }) => {
                 <input type='text' placeholder='Responsável pelo aluno' />
             </label>
             <label>
-                <p>Número do telefone</p>
+                <p>Telefone do responsável</p>
                 <Telefone />
             </label>
             <label>
-                <p>Data</p>
+                <p>Telefone de emergência</p>
+                <Telefone />
+            </label>
+            <label>
+                <p>Data de Nascimento</p>
                 <Data desc="Informe a data" />
             </label>
             <label>

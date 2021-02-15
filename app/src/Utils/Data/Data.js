@@ -11,6 +11,10 @@ const Data = ({ desc }) => {
         };
     };
 
+    const Teclas = (e) => {
+        if (e.keyCode === 8) {setNum('')}
+    }
+
     useEffect(() => {
         if (num.length === 2) {
             setMascNum(`${num}/`)
@@ -23,7 +27,7 @@ const Data = ({ desc }) => {
 
     return (
         <Fragment>
-            <input type="text" placeholder={desc} onChange={ValidarNum} value={mascNum} />
+            <input type="text" placeholder={desc} onChange={ValidarNum} value={mascNum} onKeyDown={Teclas} />
         </Fragment>
     );
 };

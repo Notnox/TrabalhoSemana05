@@ -11,6 +11,10 @@ const Telefone = () => {
         };
     };
 
+    const Teclas = (e) => {
+        if (e.keyCode === 8) {setTell('')}
+    }
+
     useEffect(() => {
         if (tell.length === 2) {
             setMascTell(`(${tell}) `)
@@ -25,7 +29,7 @@ const Telefone = () => {
 
     return (
         <Fragment>
-            <input type="text" placeholder="Ex. 99999999" onChange={ValidarTell} value={mascTell} />
+            <input type="text" placeholder="Ex. 99999999" onChange={ValidarTell} value={mascTell} onKeyDown={Teclas}/>
         </Fragment>
     );
 };
