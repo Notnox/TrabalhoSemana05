@@ -65,7 +65,7 @@ const Form = ({ }) => {
             {alimentar &&
                 <label>
                     <p>Descrição da restrição alimentar</p>
-                    <input type='text' placeholder='Descreva a restrição.'/>
+                    <input type='text' placeholder='Descreva a restrição.' />
                 </label>
             }
             <label>
@@ -94,6 +94,26 @@ const Form = ({ }) => {
                 </label>
                 <button type='button' onClick={adicionarAutorizado}>+</button>
             </div>
+            <label>
+                <p>Em caso de emergência avisar:</p>
+                <select>
+                    <option value='Selecione'>Selecione</option>
+                    <option value='Pais'>Pais</option>
+                    <option value='Irmão/ã'>Irmão/ã</option>
+                    <option value='Tios'>Tios</option>
+                    <option value='Avós'>Avós</option>
+                </select>
+            </label>
+            <label>
+                <p>Turma</p>
+                <select>
+                    <option value='Selecione'>Selecione</option>
+                    <option value='A12'>A12</option>
+                    <option value='B5'>B5</option>
+                    <option value='B7'>B7</option>
+                    <option value='C15'>C15</option>
+                </select>
+            </label>
             <label>
                 <p>Observações adicionais</p>
                 <textarea placeholder="Observações adicionais" />
