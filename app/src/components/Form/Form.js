@@ -35,6 +35,14 @@ const Form = ({ }) => {
     return (
         <form>
             <label>
+                <p>Nome</p>
+                <input type='text' placeholder='Nome do aluno' />
+            </label>
+            <label>
+                <p>Responsável pelo aluno</p>
+                <input type='text' placeholder='Responsável pelo aluno' />
+            </label>
+            <label>
                 <p>Número do telefone</p>
                 <Telefone />
             </label>
@@ -65,6 +73,10 @@ const Form = ({ }) => {
                 </label>
                 <button type='button' onClick={adicionarAutorizado}>+</button>
             </div>
+            <label>
+                <p>Observações adicionais</p>
+                <textarea placeholder="Observações adicionais" />
+            </label>
         </form>
     );
 };
