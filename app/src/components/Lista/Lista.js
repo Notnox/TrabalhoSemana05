@@ -2,7 +2,7 @@ import React from 'react';
 
 const Lista = () => {
     return (
-        <>
+        <section>
             <header>
                 <label>
                     <h3>Informe o nome do aluno</h3>
@@ -20,7 +20,7 @@ const Lista = () => {
                     <th colSpan="2">Ferramentas</th>
                 </tr>
             </table>
-        </>
+        </section>
     );
 };
 
