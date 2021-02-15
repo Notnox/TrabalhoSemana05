@@ -1,35 +1,31 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 
-const Telefone = () => {
-
-    const [tell, setTell] = useState('');
-    const [mascTell, setMascTell] = useState('');
+const Telefone = ({ name, dados, alterarDados, value }) => {
 
     const ValidarTell = (e) => {
-        if (tell.length < 16) {
-            setTell(e.target.value)
-        };
+        const { name, value } = e.target;
+
+        if (value.length < 17) {
+            if (value.length === 2) {
+                alterarDados({ ...dados, [name]: `(${value}) ` });
+            } else if (value.length === 6) {
+                alterarDados({ ...dados, [name]: `${value} ` });
+            } else if (value.length === 11) {
+                alterarDados({ ...dados, [name]: `${value}-` });
+            } else {
+                alterarDados({ ...dados, [name]: value });
+            };
+        }
     };
 
     const Teclas = (e) => {
-        if (e.keyCode === 8) {setTell('')}
+        const { name } = e.target;
+        if (e.keyCode === 8) {  alterarDados({ ...dados, [name]: "" }); };
     }
-
-    useEffect(() => {
-        if (tell.length === 2) {
-            setMascTell(`(${tell}) `)
-        } else if (tell.length === 6) {
-            setMascTell(`${tell} `)
-        } else if (tell.length === 11) {
-            setMascTell(`${tell}-`)
-        } else {
-            setMascTell(tell)
-        };
-    }, [tell])
 
     return (
         <Fragment>
-            <input type="text" placeholder="Ex. 99999999" onChange={ValidarTell} value={mascTell} onKeyDown={Teclas}/>
+            <input type="text" placeholder="Ex. 99999999" value={value} onKeyDown={Teclas} name={name} onChange={ValidarTell} />
         </Fragment>
     );
 };

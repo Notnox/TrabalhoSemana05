@@ -1,0 +1,19 @@
+{
+  "Alunos": [
+    {
+      "nome": "123123",
+      "responsavel": "321321",
+      "responsavelTell": "(31) 2 321",
+      "responsavelEm": "(32) 1 321",
+      "data": "32/13/213",
+      "cAlimentos": true,
+      "alimento": "321321",
+      "avisar": "Tios",
+      "turma": "B5",
+      "obs": "321321",
+      "fotos": true,
+      "autorizados": {},
+      "id": 1
+    }
+  ]
+}

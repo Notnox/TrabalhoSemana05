@@ -1,33 +1,29 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 
-const Data = ({ desc }) => {
-
-    const [num, setNum] = useState('');
-    const [mascNum, setMascNum] = useState('');
+const Data = ({ desc, dados, alterarDados, name, value }) => {
 
     const ValidarNum = (e) => {
-        if (num.length < 10) {
-            setNum(e.target.value)
+        const { name, value } = e.target;
+
+        if (value.length < 11) {
+            if (value.length === 2) {
+                alterarDados({ ...dados, [name]: `${value}/` });
+            } else if (value.length === 5) {
+                alterarDados({ ...dados, [name]: `${value}/` });
+            } else {
+                alterarDados({ ...dados, [name]: value });
+            };
         };
     };
 
     const Teclas = (e) => {
-        if (e.keyCode === 8) {setNum('')}
+        const { name } = e.target;
+        if (e.keyCode === 8) {  alterarDados({ ...dados, [name]: "" }); };
     }
-
-    useEffect(() => {
-        if (num.length === 2) {
-            setMascNum(`${num}/`)
-        } else if (num.length === 5) {
-            setMascNum(`${num}/`)
-        } else {
-            setMascNum(num)
-        };
-    }, [num])
 
     return (
         <Fragment>
-            <input type="text" placeholder={desc} onChange={ValidarNum} value={mascNum} onKeyDown={Teclas} />
+            <input type="text" placeholder={desc} onChange={ValidarNum} value={value} name={name} onKeyDown={Teclas} />
         </Fragment>
     );
 };
