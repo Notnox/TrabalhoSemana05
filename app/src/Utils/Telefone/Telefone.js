@@ -25,7 +25,7 @@ const Telefone = ({ name, dados, alterarDados, value }) => {
 
     return (
         <Fragment>
-            <input type="text" placeholder="Ex. 99999999" value={value} onKeyDown={Teclas} name={name} onChange={ValidarTell} />
+            <input className='input__Form' type="text" placeholder="Ex. 99999999" value={value} onKeyDown={Teclas} name={name} onChange={ValidarTell} />
         </Fragment>
     );
 };

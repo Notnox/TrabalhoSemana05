@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Data from '../../Utils/Data/Data';
 import Telefone from '../../Utils/Telefone/Telefone';
 import axios from 'axios'
+import './Form.css'
 
 const INITIAL_CADASTRO = {
     nome: '',
@@ -81,6 +82,14 @@ const Form = ({ id }) => {
     const onSubmit = (e) => {
         e.preventDefault()
 
+        if (valueCadastro.nome.length === 0) { return alert('Informe um nome') };
+        if (valueCadastro.responsavel.length === 0) { return alert('Informe um responsável') };
+        if (valueCadastro.responsavelTell.length === 0) { return alert('Informe um telefone do responsável') };
+        if (valueCadastro.responsavelEm.length === 0) { return alert('Informe um telefone de emergência') };
+        if (valueCadastro.avisar.length === 0) { return alert('Informe quem deve ser avisado') };
+        if (valueCadastro.turma.length === 0) { return alert('Informe uma turma') };
+        if (valueCadastro.data.length === 0) { return alert('Informe a data de nascimento') };
+
         axios.post('http://localhost:5000/alunos', valueCadastro)
 
         if (autorizados) {
@@ -89,26 +98,24 @@ const Form = ({ id }) => {
             });
         }
 
-        console.log('id:', id, "autorizado:", autorizado,"autorizados:", autorizados);
-
         INITIAL_AUTORIZADOS.alunoId += 1
 
         setValueCadastro(INITIAL_CADASTRO)
         setAutorizado(INITIAL_AUTORIZADOS)
         setAutorizados([])
 
-        console.log('id:', id, "autorizado:", autorizado,"autorizados:", autorizados);
+        window.location.reload(false);
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className='body__Form'>
             <label>
                 <p>Nome</p>
-                <input type='text' placeholder='Nome do aluno' name='nome' value={valueCadastro.nome} onChange={onChange} />
+                <input className='input__Form' type='text' placeholder='Nome do aluno' name='nome' value={valueCadastro.nome} onChange={onChange} />
             </label>
             <label>
                 <p>Responsável pelo aluno</p>
-                <input type='text' placeholder='Responsável pelo aluno' name='responsavel' value={valueCadastro.responsavel} onChange={onChange} />
+                <input className='input__Form' type='text' placeholder='Responsável pelo aluno' name='responsavel' value={valueCadastro.responsavel} onChange={onChange} />
             </label>
             <label>
                 <p>Telefone do responsável</p>
@@ -128,22 +135,22 @@ const Form = ({ id }) => {
             {valueCadastro.cAlimentos &&
                 <label>
                     <p>Descrição da restrição alimentar</p>
-                    <input type='text' placeholder='Descreva a restrição.' name='alimento' value={valueCadastro.alimento} onChange={onChange} />
+                    <input  type='text' placeholder='Descreva a restrição.' name='alimento' value={valueCadastro.alimento} onChange={onChange} />
                 </label>
             }
             <label>
                 <input type='checkbox' checked={valueCadastro.fotos} onChange={() => setValueCadastro({ ...valueCadastro, fotos: !valueCadastro.fotos })} /> Autorização de fotos e vídeos da criança para uso escolar
             </label>
             <div>
-                <p>Autorizados para retirada</p>
+                <p className='autorizados__p'>Autorizados para retirada</p>
                 {autorizados.length > 0 && autorizados.map((e) => {
                     {
-                        return <section><span>{e.nome}</span><span>{e.parentesco}</span></section>
+                        return <section><span>Nome: {e.nome}</span><span>Parentesco: {e.parentesco}</span></section>
                     }
                 })}
                 <label>
                     <p>Nome</p>
-                    <input type='text' placeholder='Informe o nome' name='nome' onChange={onChangeAutorizado} value={autorizado.nome} />
+                    <input className='input__Form' type='text' placeholder='Informe o nome' name='nome' onChange={onChangeAutorizado} value={autorizado.nome} />
                 </label>
                 <label>
                     <p>Parentesco</p>
@@ -179,7 +186,7 @@ const Form = ({ id }) => {
             </label>
             <label>
                 <p>Observações adicionais</p>
-                <textarea placeholder="Observações adicionais" name='obs' value={valueCadastro.obs} onChange={onChange} />
+                <textarea className='input__Form' placeholder="Observações adicionais" name='obs' value={valueCadastro.obs} onChange={onChange} />
             </label>
             <button type='button' onClick={() => setValueCadastro(INITIAL_CADASTRO)}>Novo</button>
             <button onSubmit={onSubmit}>Salvar</button>

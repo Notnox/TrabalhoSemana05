@@ -23,7 +23,7 @@ const Data = ({ desc, dados, alterarDados, name, value }) => {
 
     return (
         <Fragment>
-            <input type="text" placeholder={desc} onChange={ValidarNum} value={value} name={name} onKeyDown={Teclas} />
+            <input className='input__Form' type="text" placeholder={desc} onChange={ValidarNum} value={value} name={name} onKeyDown={Teclas} />
         </Fragment>
     );
 };

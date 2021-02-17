@@ -1,0 +1,29 @@
+.body__List {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    margin: auto;
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 50px;
+
+    width: 800px;
+    background-color: rgb(190, 190, 190);
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.Table__List {
+    font-size: 10pt;
+}
+
+.input__List {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.button__List {
+    margin-bottom: 5px;
+}
