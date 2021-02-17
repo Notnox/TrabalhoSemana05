@@ -12,6 +12,7 @@ const INITIAL_CADASTRO = {
     data: '',
     cAlimentos: false,
     alimento: '',
+    autorizados: {},
     avisar: '',
     turma: '',
     obs: '',
@@ -30,23 +31,37 @@ const Form = ({ id }) => {
     const [valueCadastro, setValueCadastro] = useState(INITIAL_CADASTRO);
     const [autorizado, setAutorizado] = useState(INITIAL_AUTORIZADOS);
     const [autorizados, setAutorizados] = useState([]);
+    const [valorId, setValorId] = useState('')
+
+    useEffect(() => { setValorId(id) }, [id])
 
     useEffect(() => {
-        if (id) {
+
+        if (valorId) {
+            axios.get('http://localhost:5000/alunos?_embed=autorizados')
+                .then((response) => {
+                    setAutorizados(response.data)
+                    setAutorizados(...autorizados, autorizados)
+                    console.log(autorizados);
+                })
+
             axios.get(`http://localhost:5000/alunos/${id}`)
                 .then((response) => {
-                    setValores(response.data)
+                    setValueCadastro(response.data)
+                    console.log(response.data);
                 })
+
         } else {
             axios.get('http://localhost:5000/alunos?_embed=autorizados')
                 .then((response) => {
                     setValores(response.data)
                 });
         }
-    }, [])
+
+    }, [valorId])
 
     useEffect(() => {
-        if (!id) {
+        if (!valorId) {
             setAutorizado({ ...autorizado, alunoId: valores.length + 1 });
             INITIAL_AUTORIZADOS.alunoId = valores.length + 1
         } else {
@@ -82,6 +97,11 @@ const Form = ({ id }) => {
     const onSubmit = (e) => {
         e.preventDefault()
 
+        const method = valorId ? 'put' : 'post'
+        const url = valorId
+            ? `http://localhost:5000/alunos/${id}`
+            : 'http://localhost:5000/alunos'
+
         if (valueCadastro.nome.length === 0) { return alert('Informe um nome') };
         if (valueCadastro.responsavel.length === 0) { return alert('Informe um responsável') };
         if (valueCadastro.responsavelTell.length === 0) { return alert('Informe um telefone do responsável') };
@@ -90,7 +110,7 @@ const Form = ({ id }) => {
         if (valueCadastro.turma.length === 0) { return alert('Informe uma turma') };
         if (valueCadastro.data.length === 0) { return alert('Informe a data de nascimento') };
 
-        axios.post('http://localhost:5000/alunos', valueCadastro)
+        axios[method](url, valueCadastro)
 
         if (autorizados) {
             autorizados.map((item) => {
@@ -104,8 +124,15 @@ const Form = ({ id }) => {
         setAutorizado(INITIAL_AUTORIZADOS)
         setAutorizados([])
 
-        window.location.reload(false);
+        window.location.reload();
     }
+
+    const NovoClick = () => {
+        setValueCadastro(INITIAL_CADASTRO);
+        setValorId('')
+
+    }
+
 
     return (
         <form onSubmit={onSubmit} className='body__Form'>
@@ -135,7 +162,7 @@ const Form = ({ id }) => {
             {valueCadastro.cAlimentos &&
                 <label>
                     <p>Descrição da restrição alimentar</p>
-                    <input  type='text' placeholder='Descreva a restrição.' name='alimento' value={valueCadastro.alimento} onChange={onChange} />
+                    <input type='text' placeholder='Descreva a restrição.' name='alimento' value={valueCadastro.alimento} onChange={onChange} />
                 </label>
             }
             <label>
@@ -188,7 +215,7 @@ const Form = ({ id }) => {
                 <p>Observações adicionais</p>
                 <textarea className='input__Form' placeholder="Observações adicionais" name='obs' value={valueCadastro.obs} onChange={onChange} />
             </label>
-            <button type='button' onClick={() => setValueCadastro(INITIAL_CADASTRO)}>Novo</button>
+            <button type='button' onClick={NovoClick}>Novo</button>
             <button onSubmit={onSubmit}>Salvar</button>
         </form>
     );

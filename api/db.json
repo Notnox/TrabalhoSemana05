@@ -1,100 +1,33 @@
 {
   "alunos": [
     {
-      "nome": "ad1232",
-      "responsavel": "321323",
-      "responsavelTell": "(31) 2 3213-2132",
-      "responsavelEm": "(32) 1 3213-1232",
-      "data": "32/13/2132",
+      "nome": "lucas2",
+      "responsavel": "andrea",
+      "responsavelTell": "(12) 3 1231-2312",
+      "responsavelEm": "(32) 1 3213-2132",
+      "data": "23/12/3213",
       "cAlimentos": true,
-      "alimento": "321321321",
-      "avisar": "Irmão/ã",
-      "turma": "B7",
-      "obs": "321321321",
+      "alimento": "leite",
+      "avisar": "Pais",
+      "turma": "A12",
+      "obs": "",
+      "autorizados": [],
       "fotos": true,
       "id": 1
-    },
-    {
-      "nome": "asdsa",
-      "responsavel": "dsadsa",
-      "responsavelTell": "(12) 3 2132-13",
-      "responsavelEm": "(32) 1 3213-2132",
-      "data": "32/13/232",
-      "cAlimentos": true,
-      "alimento": "321321",
-      "avisar": "Irmão/ã",
-      "turma": "B5",
-      "obs": "312321321",
-      "fotos": true,
-      "id": 2
-    },
-    {
-      "nome": "12321",
-      "responsavel": "321",
-      "responsavelTell": "",
-      "responsavelEm": "",
-      "data": "",
-      "cAlimentos": false,
-      "alimento": "",
-      "avisar": "",
-      "turma": "",
-      "obs": "",
-      "fotos": false,
-      "id": 3
-    },
-    {
-      "nome": "21321",
-      "responsavel": "",
-      "responsavelTell": "",
-      "responsavelEm": "",
-      "data": "",
-      "cAlimentos": false,
-      "alimento": "",
-      "avisar": "",
-      "turma": "",
-      "obs": "",
-      "fotos": false,
-      "id": 4
-    },
-    {
-      "nome": "fdsfds",
-      "responsavel": "dsad",
-      "responsavelTell": "(32) 1 321",
-      "responsavelEm": "(32) 1 3",
-      "data": "32/13/",
-      "cAlimentos": false,
-      "alimento": "",
-      "avisar": "Avós",
-      "turma": "B7",
-      "obs": "",
-      "fotos": false,
-      "id": 5
     }
   ],
   "autorizados": [
     {
-      "nome": "312321312321",
-      "parentesco": "Tios",
+      "nome": "andrea",
+      "parentesco": "Pais",
       "alunoId": 1,
       "id": 1
     },
     {
-      "nome": "312321321",
-      "parentesco": "Tios",
-      "alunoId": 2,
+      "nome": "anonimus",
+      "parentesco": "Pais",
+      "alunoId": 1,
       "id": 2
-    },
-    {
-      "nome": "312321321",
-      "parentesco": "Tios",
-      "alunoId": 2,
-      "id": 3
-    },
-    {
-      "nome": "312321312",
-      "parentesco": "Tios",
-      "alunoId": 2,
-      "id": 4
     }
   ]
 }
